@@ -2,32 +2,28 @@
 
 ## Available Scopes
 
-TapAuth supports short scope IDs for readability. Full Google URLs also work.
+Use the Google scope name without the URL prefix. Full URLs also work.
 
-| Short ID | Access | Full URL |
-|----------|--------|----------|
-| `drive_read` | Read Google Drive files | `https://www.googleapis.com/auth/drive.readonly` |
-| `drive_write` | Full Drive access (read/write) | `https://www.googleapis.com/auth/drive` |
-| `calendar_read` | Read calendar events | `https://www.googleapis.com/auth/calendar.readonly` |
-| `calendar_events` | Full calendar access | `https://www.googleapis.com/auth/calendar` |
-| `sheets_read` | Read Google Sheets | `https://www.googleapis.com/auth/spreadsheets.readonly` |
-| `sheets_write` | Full Sheets access | `https://www.googleapis.com/auth/spreadsheets` |
-| `docs_read` | Read Google Docs | `https://www.googleapis.com/auth/documents.readonly` |
-| `docs_write` | Full Docs access | `https://www.googleapis.com/auth/documents` |
-| `contacts_read` | Read contacts | `https://www.googleapis.com/auth/contacts.readonly` |
-
-The following scopes don't have short IDs yet — use the full URL:
-
-| Full URL | Access |
-|----------|--------|
-| `https://www.googleapis.com/auth/userinfo.email` | Read user email |
-| `https://www.googleapis.com/auth/userinfo.profile` | Read user profile |
+| Scope | Access | Full URL |
+|-------|--------|----------|
+| `drive.readonly` | Read Google Drive files | `https://www.googleapis.com/auth/drive.readonly` |
+| `drive.file` | Create & edit Drive files | `https://www.googleapis.com/auth/drive.file` |
+| `calendar.readonly` | Read calendar events | `https://www.googleapis.com/auth/calendar.readonly` |
+| `calendar.events` | Full calendar access | `https://www.googleapis.com/auth/calendar.events` |
+| `spreadsheets.readonly` | Read Google Sheets | `https://www.googleapis.com/auth/spreadsheets.readonly` |
+| `spreadsheets` | Full Sheets access | `https://www.googleapis.com/auth/spreadsheets` |
+| `documents.readonly` | Read Google Docs | `https://www.googleapis.com/auth/documents.readonly` |
+| `documents` | Full Docs access | `https://www.googleapis.com/auth/documents` |
+| `contacts.readonly` | Read contacts | `https://www.googleapis.com/auth/contacts.readonly` |
+| `contacts` | Full contacts access | `https://www.googleapis.com/auth/contacts` |
+| `userinfo.email` | Read user email | `https://www.googleapis.com/auth/userinfo.email` |
+| `userinfo.profile` | Read user profile | `https://www.googleapis.com/auth/userinfo.profile` |
 
 ## Example: List Drive Files
 
 ```bash
 # 1. Get a token
-./scripts/tapauth.sh google "drive_read" "Drive Reader"
+./scripts/tapauth.sh google "drive.readonly" "Drive Reader"
 
 # 2. List files
 curl -H "Authorization: Bearer <token>" \
@@ -50,17 +46,17 @@ curl -H "Authorization: Bearer <token>" \
 
 ## Gotchas
 
-- **Short IDs:** Use short IDs like `drive_read` instead of full URLs. Both formats work.
+- **Scope names:** Use Google's actual scope names without the URL prefix (e.g. `drive.readonly`, not `drive_read`). Full URLs also work.
 - **Token refresh:** Google access tokens expire after ~1 hour. TapAuth handles refresh automatically — just call the token endpoint again to get a fresh token.
 - **Unverified app warning:** Users may see a "This app isn't verified" screen. They can click "Advanced" → "Go to TapAuth" to proceed.
 - **Readonly preference:** Always prefer read-only scope variants unless you need write access. Higher approval rate.
-- **Multiple scopes:** Pass as comma-separated or array: `["drive_read", "calendar_read"]`
+- **Multiple scopes:** Pass as comma-separated: `"drive.readonly,calendar.readonly"`
 
 ## Recommended Minimum Scopes
 
 | Use Case | Scopes |
 |----------|--------|
-| Browse Drive | `drive_read` |
-| Read calendar | `calendar_read` |
-| Read spreadsheet | `sheets_read` |
-| Full workspace | `drive_write`, `calendar_events`, `sheets_write`, `docs_write` |
+| Browse Drive | `drive.readonly` |
+| Read calendar | `calendar.readonly` |
+| Read spreadsheet | `spreadsheets.readonly` |
+| Full workspace | `drive.file`, `calendar.events`, `spreadsheets`, `documents` |

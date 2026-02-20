@@ -2,27 +2,23 @@
 
 ## Available Scopes
 
-TapAuth supports short scope IDs for readability. Full Google URLs also work.
+Use the Google scope name without the URL prefix. Full URLs also work.
 
-| Short ID | Access | Full URL |
-|----------|--------|----------|
-| `gmail_read` | Read emails and labels | `https://www.googleapis.com/auth/gmail.readonly` |
-| `gmail_send` | Send emails only | `https://www.googleapis.com/auth/gmail.send` |
+| Scope | Access | Full URL |
+|-------|--------|----------|
+| `gmail.readonly` | Read emails and labels | `https://www.googleapis.com/auth/gmail.readonly` |
+| `gmail.send` | Send emails only | `https://www.googleapis.com/auth/gmail.send` |
+| `gmail.modify` | Read, send, and modify (labels, archive) | `https://www.googleapis.com/auth/gmail.modify` |
+| `gmail.compose` | Create and send drafts | `https://www.googleapis.com/auth/gmail.compose` |
+| `gmail.labels` | Manage labels | `https://www.googleapis.com/auth/gmail.labels` |
 
-The following Gmail scopes don't have short IDs yet — use the full URL:
-
-| Full URL | Access |
-|----------|--------|
-| `https://www.googleapis.com/auth/gmail.modify` | Read, send, and modify (labels, archive) |
-| `https://www.googleapis.com/auth/gmail.compose` | Create and send drafts |
-| `https://www.googleapis.com/auth/gmail.labels` | Manage labels |
-| `https://mail.google.com/` | Full Gmail access (avoid unless necessary) |
+For full Gmail access, use the full URL: `https://mail.google.com/`
 
 ## Example: Read Recent Emails
 
 ```bash
 # 1. Get a token
-./scripts/tapauth.sh gmail "gmail_read" "Email Reader"
+./scripts/tapauth.sh gmail "gmail.readonly" "Email Reader"
 
 # 2. List messages
 curl -H "Authorization: Bearer <token>" \
@@ -48,7 +44,7 @@ curl -X POST -H "Authorization: Bearer <token>" \
 ## Gotchas
 
 - **Provider name:** Use `gmail` (not `google`) when creating the grant — TapAuth treats Gmail separately for scope clarity.
-- **Short IDs:** Use `gmail_read` and `gmail_send` instead of full URLs. Both formats work.
+- **Scope names:** Use Google's actual scope names without the URL prefix (e.g. `gmail.readonly`, not `gmail_read`). Full URLs also work.
 - **Token refresh:** Same as Google — tokens expire after ~1 hour. Re-call the token endpoint for a fresh one.
 - **Sensitive scopes:** Gmail scopes are classified as "sensitive" by Google. Users will see an extra confirmation screen.
 - **Email format:** The Gmail API expects RFC 2822 formatted emails, base64url-encoded. Use the raw format.
@@ -58,7 +54,7 @@ curl -X POST -H "Authorization: Bearer <token>" \
 
 | Use Case | Scopes |
 |----------|--------|
-| Read inbox | `gmail_read` |
-| Send emails | `gmail_send` |
-| Read + send | `gmail_read`, `gmail_send` |
-| Full management | `https://www.googleapis.com/auth/gmail.modify` (no short ID) |
+| Read inbox | `gmail.readonly` |
+| Send emails | `gmail.send` |
+| Read + send | `gmail.readonly`, `gmail.send` |
+| Full management | `gmail.modify` |

@@ -4,7 +4,7 @@
 #
 # Example:
 #   ./tapauth.sh github "repo,read:user" "My Agent"
-#   ./tapauth.sh google "drive_read" "Drive Reader"
+#   ./tapauth.sh google "drive.readonly" "Drive Reader"
 
 set -euo pipefail
 
