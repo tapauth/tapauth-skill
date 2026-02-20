@@ -98,7 +98,7 @@ See the `references/` directory for provider-specific scopes, examples, and gotc
 
 - **GitHub** → `references/github.md` — repos, issues, PRs, user data
 - **Google** → `references/google.md` — Drive, Calendar, Sheets, Docs
-- **Gmail** → `references/gmail.md` — read, send, manage emails
+- **Gmail** → `references/gmail.md` — read, send, manage emails (uses `google` provider)
 - **Linear** → `references/linear.md` — issues, projects, teams
 
 ## Helper Script

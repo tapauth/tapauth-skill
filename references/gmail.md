@@ -2,20 +2,23 @@
 
 ## Available Scopes
 
-| Scope | Access |
-|-------|--------|
-| `https://www.googleapis.com/auth/gmail.readonly` | Read emails and labels |
-| `https://www.googleapis.com/auth/gmail.send` | Send emails only |
-| `https://www.googleapis.com/auth/gmail.modify` | Read, send, and modify (labels, archive) |
-| `https://www.googleapis.com/auth/gmail.compose` | Create and send drafts |
-| `https://www.googleapis.com/auth/gmail.labels` | Manage labels |
-| `https://mail.google.com/` | Full Gmail access (avoid unless necessary) |
+Use the Google scope name without the URL prefix. Full URLs also work.
+
+| Scope | Access | Full URL |
+|-------|--------|----------|
+| `gmail.readonly` | Read emails and labels | `https://www.googleapis.com/auth/gmail.readonly` |
+| `gmail.send` | Send emails only | `https://www.googleapis.com/auth/gmail.send` |
+| `gmail.modify` | Read, send, and modify (labels, archive) | `https://www.googleapis.com/auth/gmail.modify` |
+| `gmail.compose` | Create and send drafts | `https://www.googleapis.com/auth/gmail.compose` |
+| `gmail.labels` | Manage labels | `https://www.googleapis.com/auth/gmail.labels` |
+
+For full Gmail access, use the full URL: `https://mail.google.com/`
 
 ## Example: Read Recent Emails
 
 ```bash
 # 1. Get a token
-./scripts/tapauth.sh gmail "https://www.googleapis.com/auth/gmail.readonly" "Email Reader"
+./scripts/tapauth.sh google "gmail.readonly" "Email Reader"
 
 # 2. List messages
 curl -H "Authorization: Bearer <token>" \
@@ -40,7 +43,8 @@ curl -X POST -H "Authorization: Bearer <token>" \
 
 ## Gotchas
 
-- **Provider name:** Use `gmail` (not `google`) when creating the grant — TapAuth treats Gmail separately for scope clarity.
+- **Provider name:** Use `google` as the provider — Gmail scopes are part of the Google provider in TapAuth. There is no separate `gmail` provider.
+- **Scope names:** Use Google's actual scope names without the URL prefix (e.g. `gmail.readonly`, not `gmail_read`). Full URLs also work.
 - **Token refresh:** Same as Google — tokens expire after ~1 hour. Re-call the token endpoint for a fresh one.
 - **Sensitive scopes:** Gmail scopes are classified as "sensitive" by Google. Users will see an extra confirmation screen.
 - **Email format:** The Gmail API expects RFC 2822 formatted emails, base64url-encoded. Use the raw format.
