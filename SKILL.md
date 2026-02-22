@@ -97,9 +97,18 @@ No API key needed. No signup needed. The user's approval is the only gate.
 See the `references/` directory for provider-specific scopes, examples, and gotchas:
 
 - **GitHub** → `references/github.md` — repos, issues, PRs, user data
-- **Google** → `references/google.md` — Drive, Calendar, Sheets, Docs
+- **Google** → `references/google.md` — Gmail, Drive, Calendar, Sheets, Docs, Contacts (all scopes)
 - **Gmail** → `references/gmail.md` — read, send, manage emails (uses `google` provider)
+- **Google Drive** → `references/google_drive.md` — focused Drive-only access
+- **Google Contacts** → `references/google_contacts.md` — view and manage contacts
+- **Google Sheets** → `references/google_sheets.md` — read and write spreadsheets
+- **Google Docs** → `references/google_docs.md` — read and write documents
 - **Linear** → `references/linear.md` — issues, projects, teams
+- **Vercel** → `references/vercel.md` — deployments, projects, env vars, domains
+- **Notion** → `references/notion.md` — pages, databases, search
+
+> **Tip:** The focused Google providers (`google_drive`, `google_sheets`, etc.) show simpler consent screens.
+> Use them when you only need one Google service. Use `google` when you need multiple services.
 
 ## Helper Script
 
