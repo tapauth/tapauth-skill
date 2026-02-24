@@ -108,6 +108,7 @@ See the `references/` directory for provider-specific scopes, examples, and gotc
 - **Notion** → `references/notion.md` — pages, databases, search
 - **Slack** → `references/slack.md` — channels, messages, users, files
 - **Asana** → `references/asana.md` — tasks, projects, workspaces
+- **Sentry** → `references/sentry.md` — error tracking, issues, projects, releases
 
 > **Tip:** The focused Google providers (`google_drive`, `google_sheets`, etc.) show simpler consent screens.
 > Use them when you only need one Google service. Use `google` when you need multiple services.
