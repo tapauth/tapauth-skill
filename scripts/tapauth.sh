@@ -11,7 +11,7 @@ set -euo pipefail
 PROVIDER="${1:?Usage: tapauth.sh <provider> <scopes> <agent_name> [base_url]}"
 SCOPES="${2:?Usage: tapauth.sh <provider> <scopes> <agent_name> [base_url]}"
 AGENT_NAME="${3:?Usage: tapauth.sh <provider> <scopes> <agent_name> [base_url]}"
-BASE_URL="${4:-https://tapauth.com}"
+BASE_URL="${4:-https://tapauth.ai}"
 
 # Convert comma-separated scopes to JSON array
 SCOPES_JSON=$(echo "$SCOPES" | tr ',' '\n' | sed 's/^/"/;s/$/"/' | tr '\n' ',' | sed 's/,$//' | sed 's/^/[/;s/$/]/')

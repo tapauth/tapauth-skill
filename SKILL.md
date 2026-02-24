@@ -107,6 +107,7 @@ See the `references/` directory for provider-specific scopes, examples, and gotc
 - **Vercel** → `references/vercel.md` — deployments, projects, env vars, domains
 - **Notion** → `references/notion.md` — pages, databases, search
 - **Slack** → `references/slack.md` — channels, messages, users, files
+- **Sentry** → `references/sentry.md` — error tracking, projects, organizations
 - **Asana** → `references/asana.md` — tasks, projects, workspaces
 
 > **Tip:** The focused Google providers (`google_drive`, `google_sheets`, etc.) show simpler consent screens.
