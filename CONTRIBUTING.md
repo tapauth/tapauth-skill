@@ -8,13 +8,13 @@ The **monorepo** (`tapauth/tapauth` → `packages/skill/`) is the source of trut
 
 When provider docs are added or updated in the monorepo:
 
-1. Copy updated files from `packages/skill/providers/` to `tapauth-skill/references/`
+1. Copy updated files from `packages/skill/references/` to `tapauth-skill/references/`
 2. Update the provider list in `SKILL.md` and `README.md` if a new provider was added
 3. **Open a PR** — never push directly to main. All changes go through pull requests with review.
 
 ```bash
 # Example: sync all provider docs
-cp ~/tapauth/packages/skill/providers/*.md ~/tapauth-skill/references/
+cp ~/tapauth/packages/skill/references/*.md ~/tapauth-skill/references/
 
 # Check for new providers in production
 # Compare keys in apps/web/src/lib/providers.ts with references/ directory
