@@ -179,6 +179,8 @@ See the `references/` directory for provider-specific scopes, examples, and gotc
 - **GitHub** (`github`) → `references/github.md` — repos, issues, PRs, user data, gists, workflows
 - **Google** (`google`) → `references/google.md` — Gmail, Drive, Calendar, Sheets, Docs, Contacts (all scopes)
 - **Gmail** → `references/gmail.md` — read, send, manage emails (uses `google` provider)
+- **Google Drive** (`google_drive`) → `references/google_drive.md` — focused Drive-only access
+- **Google Contacts** (`google_contacts`) → `references/google_contacts.md` — view and manage contacts
 - **Google Sheets** (`google_sheets`) → `references/google_sheets.md` — read and write spreadsheets
 - **Google Docs** (`google_docs`) → `references/google_docs.md` — read and write documents
 - **Linear** (`linear`) → `references/linear.md` — issues, projects, teams
