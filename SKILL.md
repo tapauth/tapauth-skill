@@ -10,8 +10,8 @@ compatibility: Requires curl or any HTTP client. Works with Claude Code, Cursor,
 metadata:
   author: tapauth
   version: "1.0"
-  website: https://tapauth.com
-  docs: https://tapauth.com/docs
+  website: https://tapauth.ai
+  docs: https://tapauth.ai/docs
 ---
 
 # TapAuth — OAuth Token Broker for AI Agents
@@ -24,7 +24,7 @@ The user approves in their browser. You get a scoped token. That's it.
 ### Step 1: Create a Grant
 
 ```bash
-curl -X POST https://tapauth.com/api/grants \
+curl -X POST https://tapauth.ai/api/grants \
   -H "Content-Type: application/json" \
   -d '{
     "provider": "github",
@@ -38,7 +38,7 @@ Response:
 {
   "id": "grant_abc123",
   "grant_secret": "gs_live_xxxx",
-  "approval_url": "https://tapauth.com/approve/grant_abc123",
+  "approval_url": "https://tapauth.ai/approve/grant_abc123",
   "status": "pending",
   "expires_at": "2026-02-14T16:10:00Z"
 }
@@ -60,7 +60,7 @@ The approval URL expires after **10 minutes**. Create a new grant if it expires.
 Poll until the user approves:
 
 ```bash
-curl -X POST https://tapauth.com/api/grants/grant_abc123/token \
+curl -X POST https://tapauth.ai/api/grants/grant_abc123/token \
   -H "Content-Type: application/json" \
   -d '{"grant_secret": "gs_live_xxxx"}'
 ```
@@ -106,6 +106,8 @@ See the `references/` directory for provider-specific scopes, examples, and gotc
 - **Linear** → `references/linear.md` — issues, projects, teams
 - **Vercel** → `references/vercel.md` — deployments, projects, env vars, domains
 - **Notion** → `references/notion.md` — pages, databases, search
+- **Slack** → `references/slack.md` — channels, messages, users, files
+- **Asana** → `references/asana.md` — tasks, projects, workspaces
 
 > **Tip:** The focused Google providers (`google_drive`, `google_sheets`, etc.) show simpler consent screens.
 > Use them when you only need one Google service. Use `google` when you need multiple services.
