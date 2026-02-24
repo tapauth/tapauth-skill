@@ -10,7 +10,7 @@ When provider docs are added or updated in the monorepo:
 
 1. Copy updated files from `packages/skill/providers/` to `tapauth-skill/references/`
 2. Update the provider list in `SKILL.md` and `README.md` if a new provider was added
-3. Commit and push to `tapauth-skill` main branch
+3. **Open a PR** — never push directly to main. All changes go through pull requests with review.
 
 ```bash
 # Example: sync all provider docs
