@@ -1,5 +1,5 @@
 ---
-name: tapauth-oauth
+name: tapauth
 description: Integrate OAuth authentication for AI agents using TapAuth — get tokens for Google, GitHub, Slack, and 20+ providers with two API calls.
 ---
 
