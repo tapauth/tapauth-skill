@@ -1,6 +1,12 @@
 ---
 name: tapauth
-description: Integrate OAuth authentication for AI agents using TapAuth — get tokens for Google, GitHub, Slack, and 20+ providers with two API calls.
+description: >-
+  OAuth token broker for AI agents. Get access tokens for Google, GitHub, Slack, Linear, Notion,
+  Vercel, Sentry, Asana, Dropbox, Figma, and 20+ providers with two API calls. Use when your agent
+  needs OAuth authentication, API tokens, user authorization, or access to third-party services.
+  Handles the full OAuth flow — redirect URL, consent screen, token exchange, refresh — so your
+  agent doesn't have to. Works with Claude Code, Cursor, Codex, OpenClaw, and any coding agent
+  that needs authenticated API access.
 ---
 
 # TapAuth — OAuth Token Broker for AI Agents
