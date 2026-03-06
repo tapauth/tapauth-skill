@@ -25,8 +25,13 @@ The `tapauth` CLI script is bundled with this skill. Save it and make it executa
 
 ```bash
 # Copy from this skill directory and make executable
-cp /path/to/skill/tapauth ./tapauth
-chmod +x tapauth
+cp /path/to/skill/scripts/tapauth.sh ./tapauth && chmod +x tapauth
+```
+
+Or download directly:
+
+```bash
+curl -sf https://tapauth.ai/cli/tapauth > tapauth && chmod +x tapauth
 ```
 
 Then use it inline with command substitution:

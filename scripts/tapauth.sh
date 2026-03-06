@@ -54,8 +54,15 @@ if [ -z "${TAPAUTH_GRANT_ID:-}" ] || [ -z "${TAPAUTH_GRANT_SECRET:-}" ] || [ -z 
   exit 1
 fi
 echo "Approve access: ${TAPAUTH_APPROVE_URL}" >&2
+poll_start=$SECONDS
 while true; do
   sleep 2
+  elapsed=$((SECONDS - poll_start))
+  if [ "$elapsed" -ge 600 ]; then
+    echo "tapauth: timed out after 600s waiting for approval" >&2
+    exit 1
+  fi
+  echo "Waiting for approval... (${elapsed}s) ${TAPAUTH_APPROVE_URL}" >&2
   response=$(curl -s -w "\n%{http_code}" "${TAPAUTH_BASE}/api/v1/token/${TAPAUTH_GRANT_ID}" \
     -H "Authorization: Bearer ${TAPAUTH_GRANT_SECRET}")
   http_code="${response##*$'\n'}"
