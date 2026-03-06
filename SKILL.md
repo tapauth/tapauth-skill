@@ -179,8 +179,6 @@ See the `references/` directory for provider-specific scopes, examples, and gotc
 - **GitHub** (`github`) → `references/github.md` — repos, issues, PRs, user data, gists, workflows
 - **Google** (`google`) → `references/google.md` — Gmail, Drive, Calendar, Sheets, Docs, Contacts (all scopes)
 - **Gmail** → `references/gmail.md` — read, send, manage emails (uses `google` provider)
-- **Google Drive** (`google_drive`) → `references/google_drive.md` — focused Drive-only access
-- **Google Contacts** (`google_contacts`) → `references/google_contacts.md` — view and manage contacts
 - **Google Sheets** (`google_sheets`) → `references/google_sheets.md` — read and write spreadsheets
 - **Google Docs** (`google_docs`) → `references/google_docs.md` — read and write documents
 - **Linear** (`linear`) → `references/linear.md` — issues, projects, teams
@@ -189,9 +187,10 @@ See the `references/` directory for provider-specific scopes, examples, and gotc
 - **Slack** (`slack`) → `references/slack.md` — channels, messages, users, files
 - **Sentry** (`sentry`) → `references/sentry.md` — error tracking, projects, organizations
 - **Asana** (`asana`) → `references/asana.md` — tasks, projects, workspaces
+- **Discord** (`discord`) → `references/discord.md` — user identity, email, server list
 
-> **Tip:** The focused Google providers (`google_drive`, `google_sheets`, etc.) show simpler consent screens.
-> Use them when you only need one Google service. Use `google` when you need multiple services.
+> **Tip:** Use `google_sheets` or `google_docs` when you only need one Google service.
+> Use `google` when you need multiple services (e.g., Drive, Calendar, Gmail, Contacts).
 
 ## Provider Discovery
 
@@ -206,7 +205,7 @@ This returns each provider with its ID, name, category, available scopes, and wh
 ## Provider Notes
 
 - **GitHub:** Tokens use OAuth app authentication. The `repo` scope grants read/write access to repositories. Repo creation requires the user to have appropriate GitHub permissions. Some operations available with GitHub PATs may not work with OAuth tokens.
-- **Google:** All Google providers support automatic token refresh. Use focused providers (google_drive, google_sheets, etc.) for simpler consent screens when you only need one service.
+- **Google:** All Google providers support automatic token refresh. Use focused providers (`google_sheets`, `google_docs`) for simpler consent screens when you only need one service. For Drive access, use `google` with `drive` or `drive.readonly` scopes.
 - **Discord:** Uses user OAuth tokens (not bot tokens). Tokens expire after ~7 days with automatic refresh. The `guilds` scope returns server list only — no channel/message access.
 - **Vercel/Slack/Notion:** These are integration-level providers — scopes are fixed at installation time, not per-request.
 
