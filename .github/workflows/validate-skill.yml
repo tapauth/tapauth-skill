@@ -20,4 +20,4 @@ jobs:
         run: pip install skills-ref
 
       - name: Validate skill
-        run: agentskills validate skills/tapauth
+        run: agentskills validate .

@@ -23,4 +23,14 @@ jobs:
         run: |
           clawhub auth login --token "$CLAWHUB_TOKEN" --no-browser
           VERSION=$(jq -r .version skill.json)
-          clawhub publish . --slug tapauth --name "TapAuth" --version "$VERSION" --changelog "Synced from monorepo"
+          OUTPUT=$(clawhub publish . --slug tapauth --name "TapAuth" --version "$VERSION" --changelog "Synced from monorepo" 2>&1) && {
+            echo "$OUTPUT"
+            echo "✅ Published tapauth@$VERSION"
+          } || {
+            echo "$OUTPUT"
+            if echo "$OUTPUT" | grep -q "Version already exists"; then
+              echo "⏭️ Version $VERSION already published — skipping. Bump version in skill.json to publish a new release."
+              exit 0
+            fi
+            exit 1
+          }
