@@ -5,6 +5,7 @@ description: >-
   Use when your agent needs to access GitHub, Google Workspace, Gmail, Linear, or other OAuth
   providers on behalf of a user. One API call to create an auth request, user approves in browser,
   agent gets scoped tokens. No API key required.
+  Do NOT use for API key-based services or when the agent already has direct credentials.
 license: MIT
 compatibility: Requires curl or any HTTP client. Works with Claude Code, Cursor, OpenClaw, Codex, GitHub Copilot, and any agent with HTTP access.
 metadata:
@@ -223,6 +224,30 @@ TOKEN=$(tapauth github repo,read:user)
 
 The CLI stores credentials in `.tapauth/` (mode 700) with per-provider-scope cache files.
 
+## OpenClaw Secrets Provider
+
+TapAuth supports the OpenClaw exec secrets provider protocol via the `tapauth-secrets` script. This lets OpenClaw agents resolve OAuth tokens as secrets at startup — no manual token wiring.
+
+Configure it in your OpenClaw agent config:
+
+```json
+{
+  "secrets": {
+    "tapauth": {
+      "source": "exec",
+      "command": ["/path/to/tapauth-secrets"],
+      "passEnv": ["HOME", "TAPAUTH_HOME", "TAPAUTH_BASE_URL"]
+    }
+  }
+}
+```
+
+Then reference tokens as `tapauth.provider/scopes` (e.g. `tapauth.google/calendar.readonly`).
+
+**Important:** Grants must be pre-approved before the agent runs — `tapauth-secrets` uses a 10-second timeout and cannot prompt for interactive approval. Run `tapauth <provider> <scopes>` manually first to approve each grant.
+
+For full configuration details, error handling, and ID format reference, see the [CLI docs](https://tapauth.ai/docs).
+
 ## Common Patterns
 
 ### Ask the user to approve, then proceed
@@ -240,3 +265,11 @@ If you get `revoked`, the user withdrew access — don't retry.
 ### Scope selection
 Request the minimum scopes you need. Users see exactly what you're asking for
 and can approve with reduced permissions. Less scope = more trust = higher approval rate.
+
+## Common Issues
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| Grant creation fails with 400 | Invalid provider name or malformed scopes | Check the provider list in `references/` for valid provider IDs and scope formats |
+| Token expired / 401 on API call | Cached token expired and refresh failed | Delete the `.tapauth/` cache directory and re-run `tapauth <provider> <scopes>` to create a fresh grant |
+| Approval URL never visited | User didn't see the stderr URL | Print the URL more prominently in your agent's output; verify terminal supports stderr display |

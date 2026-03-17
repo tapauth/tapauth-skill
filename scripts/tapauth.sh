@@ -15,7 +15,9 @@ fi
 
 # Sort scopes for deterministic file naming
 sorted_scopes=$(echo "$scopes" | tr "," "\n" | sort | tr "\n" "," | sed "s/,$//")
-env_file="${TAPAUTH_DIR}/${provider}-${sorted_scopes}.env"
+# Sanitize scopes for use in filenames (URLs contain /:)
+safe_scopes=$(echo "$sorted_scopes" | tr '/:' '__')
+env_file="${TAPAUTH_DIR}/${provider}-${safe_scopes}.env"
 
 save_and_emit() {
   install -m 600 /dev/null "$env_file"

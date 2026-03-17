@@ -9,7 +9,7 @@ This is the official [Agent Skill](https://agentskills.io) for [TapAuth](https:/
 Works with any agent that supports the [Agent Skills standard](https://agentskills.io):
 
 ```bash
-npx skills add tapauth/tapauth-skill
+npx skills add tapauth/skill
 ```
 
 Compatible with: **Claude Code** · **Cursor** · **OpenClaw** · **OpenAI Codex** · **GitHub Copilot** · **VS Code** · and more.
