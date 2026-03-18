@@ -1,30 +1,28 @@
 # Contributing to TapAuth Agent Skill
 
-## How It Works
+## Source of Truth
 
-This skill is maintained by the TapAuth team. The source of truth lives in our internal systems and is synced to this public repo automatically.
+The **monorepo** (`tapauth/tapauth` → `packages/skill/`) is the source of truth for provider reference docs. This public repo (`tapauth/skill`) is the published distribution.
 
-## Reporting Issues
+## Syncing Changes
 
-If you find a bug, incorrect documentation, or a missing provider:
+When provider docs are added or updated in the monorepo:
 
-1. [Open an issue](https://github.com/tapauth/skill/issues) on this repo
-2. Include the provider name, what you expected, and what happened
-3. We'll triage and fix it in the next sync
+1. Copy updated files from `packages/skill/references/` to `skill/references/`
+2. Update the provider list in `SKILL.md` and `README.md` if a new provider was added
+3. **Open a PR** — never push directly to main. All changes go through pull requests with review.
 
-## Pull Requests
+```bash
+# Example: sync all provider docs
+cp ~/tapauth/packages/skill/references/*.md ~/skill/references/
 
-We welcome PRs for:
-
-- Typo fixes and documentation improvements
-- New provider reference docs (see `references/` for the format)
-- Bug fixes in `scripts/tapauth.sh`
-
-Please keep PRs focused on a single change.
+# Check for new providers in production
+# Compare keys in apps/web/src/lib/providers.ts with references/ directory
+```
 
 ## Publishing to ClawHub
 
-Only maintainers publish to ClawHub. After changes are merged:
+After pushing changes:
 
 ```bash
 clawhub publish /path/to/skill/ \
@@ -36,8 +34,17 @@ clawhub publish /path/to/skill/ \
 
 ## Git Identity
 
-Automated commits use:
+Use the bot identity for commits:
 
 ```
-TapAuth[bot] <2825152+TapAuth[bot]@users.noreply.github.com>
+git config user.name "TapAuth[bot]"
+git config user.email "2825152+TapAuth[bot]@users.noreply.github.com"
 ```
+
+## Checklist for Updates
+
+- [ ] All providers in `apps/web/src/lib/providers.ts` have a reference doc
+- [ ] SKILL.md provider list matches `references/` directory
+- [ ] README.md provider table matches `references/` directory
+- [ ] All URLs use `tapauth.ai` (not `tapauth.com`)
+- [ ] Version bumped in `clawhub publish` command

@@ -2,7 +2,14 @@
 set -euo pipefail
 
 TAPAUTH_BASE="${TAPAUTH_BASE_URL:-https://tapauth.ai}"
-TAPAUTH_DIR="${TAPAUTH_HOME:-./.tapauth}"
+# Use CLAUDE_PLUGIN_DATA if available (stable per-plugin dir), fall back to .tapauth
+if [ -n "${TAPAUTH_HOME:-}" ]; then
+  TAPAUTH_DIR="$TAPAUTH_HOME"
+elif [ -n "${CLAUDE_PLUGIN_DATA:-}" ]; then
+  TAPAUTH_DIR="$CLAUDE_PLUGIN_DATA"
+else
+  TAPAUTH_DIR="./.tapauth"
+fi
 mkdir -p "$TAPAUTH_DIR" && chmod 700 "$TAPAUTH_DIR"
 
 provider="${1:-}"
